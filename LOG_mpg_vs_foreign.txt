@@ -1,0 +1,105 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\dmangoubi\OneDrive - Harvard Business School\Daniel Projects\CoDA\GitHub Presenation - 2026\gitlearning_coda2\LOG_mpg_vs_foreign.txt
+  log type:  text
+ opened on:  13 Apr 2026, 14:19:09
+
+. /*
+> TITLE: mpg_vs_foreign.do
+> PURPOSE: 
+>         *Explore whether foreign made cars are more efficient than domestic made cars
+>         *Provide an example of "evolving" research
+> 
+> Daniel Mangoubi, April 2026
+> DMangoubi@hbs.edu
+> */
+. 
+. **# IMPROT DATA
+. * Import the Data
+. sysuse auto, clear 
+(1978 automobile data)
+
+. 
+. * See what is in the dataset
+. describe 
+
+Contains data from C:\Program Files\Stata18\ado\base/a/auto.dta
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2022 17:45
+                                              (_dta has notes)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+make            str18   %-18s                 Make and model
+price           int     %8.0gc                Price
+mpg             int     %8.0g                 Mileage (mpg)
+rep78           int     %8.0g                 Repair record 1978
+headroom        float   %6.1f                 Headroom (in.)
+trunk           int     %8.0g                 Trunk space (cu. ft.)
+weight          int     %8.0gc                Weight (lbs.)
+length          int     %8.0g                 Length (in.)
+turn            int     %8.0g                 Turn circle (ft.)
+displacement    int     %8.0g                 Displacement (cu. in.)
+gear_ratio      float   %6.2f                 Gear ratio
+foreign         byte    %8.0g      origin     Car origin
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: foreign
+
+. list in 1/2 
+
+     +----------------------------------------------------------------------------------------------------------------+
+     | make          price   mpg   rep78   headroom   trunk   weight   length   turn   displa~t   gear_r~o    foreign |
+     |----------------------------------------------------------------------------------------------------------------|
+  1. | AMC Concord   4,099    22       3        2.5      11    2,930      186     40        121       3.58   Domestic |
+  2. | AMC Pacer     4,749    17       3        3.0      11    3,350      173     40        258       2.53   Domestic |
+     +----------------------------------------------------------------------------------------------------------------+
+
+. 
+. 
+. **# EXPLORE DATA
+. *See relevant vars
+. tab foreign 
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   Domestic |         52       70.27       70.27
+    Foreign |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+. summarize price 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |         74    6165.257    2949.496       3291      15906
+
+. 
+. 
+. **# ANALYZE DATA
+. ttest mpg, by(foreign)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+Domestic |      52    19.82692     .657777    4.743297    18.50638    21.14747
+ Foreign |      22    24.77273     1.40951    6.611187    21.84149    27.70396
+---------+--------------------------------------------------------------------
+Combined |      74     21.2973    .6725511    5.785503     19.9569    22.63769
+---------+--------------------------------------------------------------------
+    diff |           -4.945804    1.362162               -7.661225   -2.230384
+------------------------------------------------------------------------------
+    diff = mean(Domestic) - mean(Foreign)                         t =  -3.6308
+H0: diff = 0                                     Degrees of freedom =       72
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.0003         Pr(|T| > |t|) = 0.0005          Pr(T > t) = 0.9997
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\dmangoubi\OneDrive - Harvard Business School\Daniel Projects\CoDA\GitHub Presenation - 2026\gitlearning_coda2\LOG_mpg_vs_foreign.txt
+  log type:  text
+ closed on:  13 Apr 2026, 14:19:09
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
