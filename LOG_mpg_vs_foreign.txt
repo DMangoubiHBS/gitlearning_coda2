@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\dmangoubi\OneDrive - Harvard Business School\Daniel Projects\CoDA\GitHub Presenation - 2026\gitlearning_coda2\LOG_mpg_vs_foreign.txt
   log type:  text
- opened on:  13 Apr 2026, 14:19:09
+ opened on:  13 Apr 2026, 14:24:26
 
 . /*
 > TITLE: mpg_vs_foreign.do
@@ -14,7 +14,7 @@
 > DMangoubi@hbs.edu
 > */
 . 
-. **# IMPROT DATA
+. **# IMPORT DATA
 . * Import the Data
 . sysuse auto, clear 
 (1978 automobile data)
@@ -57,22 +57,30 @@ Sorted by: foreign
 
 . 
 . 
+. **# Data Cleaning 
+. drop if price > 5000
+(37 observations deleted)
+
+. drop if weight > 3000
+(15 observations deleted)
+
+. 
 . **# EXPLORE DATA
 . *See relevant vars
 . tab foreign 
 
  Car origin |      Freq.     Percent        Cum.
 ------------+-----------------------------------
-   Domestic |         52       70.27       70.27
-    Foreign |         22       29.73      100.00
+   Domestic |         14       63.64       63.64
+    Foreign |          8       36.36      100.00
 ------------+-----------------------------------
-      Total |         74      100.00
+      Total |         22      100.00
 
 . summarize price 
 
     Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
-       price |         74    6165.257    2949.496       3291      15906
+       price |         22    4081.273    390.1231       3291       4697
 
 . 
 . 
@@ -83,23 +91,23 @@ Two-sample t test with equal variances
 ------------------------------------------------------------------------------
    Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
 ---------+--------------------------------------------------------------------
-Domestic |      52    19.82692     .657777    4.743297    18.50638    21.14747
- Foreign |      22    24.77273     1.40951    6.611187    21.84149    27.70396
+Domestic |      14    25.07143    1.055932    3.950935    22.79023    27.35263
+ Foreign |       8      28.875    1.726242    4.882549    24.79309    32.95691
 ---------+--------------------------------------------------------------------
-Combined |      74     21.2973    .6725511    5.785503     19.9569    22.63769
+Combined |      22    26.45455    .9797236    4.595311     24.4171    28.49199
 ---------+--------------------------------------------------------------------
-    diff |           -4.945804    1.362162               -7.661225   -2.230384
+    diff |           -3.803571    1.905781                -7.77896    .1718171
 ------------------------------------------------------------------------------
-    diff = mean(Domestic) - mean(Foreign)                         t =  -3.6308
-H0: diff = 0                                     Degrees of freedom =       72
+    diff = mean(Domestic) - mean(Foreign)                         t =  -1.9958
+H0: diff = 0                                     Degrees of freedom =       20
 
     Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
- Pr(T < t) = 0.0003         Pr(|T| > |t|) = 0.0005          Pr(T > t) = 0.9997
+ Pr(T < t) = 0.0299         Pr(|T| > |t|) = 0.0598          Pr(T > t) = 0.9701
 
 . 
 . log close
       name:  <unnamed>
        log:  C:\Users\dmangoubi\OneDrive - Harvard Business School\Daniel Projects\CoDA\GitHub Presenation - 2026\gitlearning_coda2\LOG_mpg_vs_foreign.txt
   log type:  text
- closed on:  13 Apr 2026, 14:19:09
+ closed on:  13 Apr 2026, 14:24:26
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

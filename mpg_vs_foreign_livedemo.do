@@ -10,7 +10,7 @@ Daniel Mangoubi, April 2026
 DMangoubi@hbs.edu
 */
 
-**# IMPROT DATA
+**# IMPORT DATA
 * Import the Data
 sysuse auto, clear 
 
@@ -18,6 +18,10 @@ sysuse auto, clear
 describe 
 list in 1/2 
 
+
+**# Data Cleaning 
+drop if price > 5000
+drop if weight > 3000
 
 **# EXPLORE DATA
 *See relevant vars
